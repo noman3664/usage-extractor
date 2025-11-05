@@ -5,7 +5,6 @@ import streamlit as st
 from io import BytesIO
 
 
-# ------------------- PDF Extraction Logic -------------------
 def extract_usage_from_pdf(pdf_bytes):
     """Extract Usage Charges and Account Number from a PDF file."""
     reader = PdfReader(pdf_bytes)
@@ -29,7 +28,7 @@ def extract_usage_from_pdf(pdf_bytes):
 # ------------------- Streamlit UI -------------------
 st.set_page_config(page_title="Usage Charges Extractor", page_icon="📊", layout="centered")
 
-st.title("📊 Etisalat Usage Charges Extractor")
+st.title("📊 Usage Charges Extractor")
 st.markdown("Upload one or multiple Etisalat PDF bills to extract **Usage Charges** and **Account Numbers**.")
 
 uploaded_files = st.file_uploader("📂 Upload PDF files", type="pdf", accept_multiple_files=True)
@@ -60,12 +59,12 @@ if uploaded_files:
             df.to_excel(writer, index=False, sheet_name="Usage_Report")
 
         st.download_button(
-            label="⬇️ Download Excel Report",
+            label="Download Excel Report",
             data=output.getvalue(),
             file_name="usage_report.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
     else:
-        st.warning("⚠️ No valid Usage Charges > 0 found in uploaded files.")
+        st.warning("No valid Usage Charges > 0 found in uploaded files.")
 else:
     st.info("Please upload one or more PDF files to begin.")
