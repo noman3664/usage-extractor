@@ -74,9 +74,9 @@ if excel_file and uploaded_pdfs:
 
                 # Reorder columns
                 merged_df = merged_df[["Account Name", "Account Number", "Usage Charges (AED)", "Service Rental (AED)"]]
-                merged_df["Comment"] = ""  # Add editable comment column
+                merged_df["Reasons"] = ""  # Add editable comment column
 
-                st.success(f"✅ Extracted and matched {len(merged_df)} record(s) successfully.")
+                st.success(f" Extracted and matched {len(merged_df)} record(s) successfully.")
 
                 # Editable data table
                 st.markdown("### 📝 Review and Add Comments")
@@ -93,18 +93,18 @@ if excel_file and uploaded_pdfs:
                     edited_df.to_excel(writer, index=False, sheet_name="Usage_Service_Report")
 
                 st.download_button(
-                    label="⬇️ Download Excel Report",
+                    label=" Download Excel Report",
                     data=output.getvalue(),
                     file_name="usage_service_report_with_names.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 )
             else:
-                st.warning("⚠️ No valid data found in the uploaded PDFs.")
+                st.warning(" No valid data found in the uploaded PDFs.")
 
     except Exception as e:
         st.error(f"Error processing Excel or PDFs: {e}")
 
 elif not excel_file:
-    st.info("📁 Please upload the Excel file first.")
+    st.info(" Please upload the Excel file first.")
 elif not uploaded_pdfs:
-    st.info("📄 Please upload one or more PDF files.")
+    st.info(" Please upload one or more PDF files.")
